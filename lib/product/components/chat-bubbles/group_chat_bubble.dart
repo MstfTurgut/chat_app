@@ -5,21 +5,22 @@ class GroupChatBubble extends StatelessWidget {
       {super.key,
       required this.text,
       required this.time,
-      required this.belongToCurrentUser,
+      required this.belongToCurrentProfile,
       required this.senderEmail});
 
   final String text;
   final String time;
-  final bool belongToCurrentUser;
+  final bool belongToCurrentProfile;
   final String senderEmail;
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
-        constraints: const BoxConstraints(maxWidth: 330),
+        constraints: const BoxConstraints(maxWidth: 260),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.amber,
+          color: belongToCurrentProfile?Colors.amber:Colors.orange.shade600,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Stack(
@@ -49,7 +50,7 @@ class GroupChatBubble extends StatelessWidget {
                   right: -2,
                   child: Text(
                     time,
-                    style: const TextStyle(color: Colors.black54),
+                    style: TextStyle(color: Colors.grey.shade700),
                   ),
                 )
           ],

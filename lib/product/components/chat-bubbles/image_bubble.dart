@@ -2,21 +2,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageBubble extends StatelessWidget {
-  const ImageBubble({super.key, required this.imageUrl, this.text , required this.time,required this.toGroup,this.senderEmail});
+  const ImageBubble({super.key, required this.imageUrl, this.text , required this.time,required this.toGroup,this.senderEmail, required this.belongToCurrentProfile});
 
   final String imageUrl;
   final String? text;
   final String time;
   final bool toGroup;
   final String? senderEmail;
+  final bool belongToCurrentProfile;
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       constraints: const BoxConstraints(maxWidth: 300),
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.amber,
+        color: belongToCurrentProfile?Colors.amber:Colors.orange.shade600,
         borderRadius: BorderRadius.circular(10),),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +36,7 @@ class ImageBubble extends StatelessWidget {
           const SizedBox(height: 2,),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(time,style: const TextStyle(color: Colors.black54),)),
+            child: Text(time,style: TextStyle(color: Colors.grey.shade700),)),
         ],)
     );
   }

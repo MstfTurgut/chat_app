@@ -153,9 +153,8 @@ class _GroupChatViewState extends State<GroupChatView> with GroupChatViewMixin{
 
     bool belongToCurrentProfile = authService.isCurrentEmail(message.senderEmail);
 
-    var alignment = (belongToCurrentProfile)
-        ? Alignment.centerRight
-        : Alignment.centerLeft;
+    var alignment =
+        (belongToCurrentProfile) ? Alignment.centerRight : Alignment.centerLeft;
 
     String formattedTime = DateFormat.Hm().format(message.timestamp.toDate());
 
@@ -172,15 +171,18 @@ class _GroupChatViewState extends State<GroupChatView> with GroupChatViewMixin{
           onLongPress: (belongToCurrentProfile)?() async{
             await _showCustomMenu(message, widget.groupId);
           }:null,
-          child: Container(
-            alignment: alignment,
-            child: ImageBubble(
-                senderEmail: message.senderEmail,
-                toGroup: true,
-                imageUrl: message.imageUrl!,
-                text: message.text,
-                time: formattedTime),
-          ),
+          
+            child: Container(
+              alignment: alignment,
+              child: ImageBubble(
+                  belongToCurrentProfile: belongToCurrentProfile,
+                  senderEmail: message.senderEmail,
+                  toGroup: true,
+                  imageUrl: message.imageUrl!,
+                  text: message.text,
+                  time: formattedTime),
+            ),
+          
         ),
       );  
     } else {
@@ -195,8 +197,7 @@ class _GroupChatViewState extends State<GroupChatView> with GroupChatViewMixin{
             alignment: alignment,
             child: GroupChatBubble(
               senderEmail: message.senderEmail,
-              belongToCurrentUser:
-                  authService.isCurrentEmail(message.senderEmail),
+              belongToCurrentProfile: belongToCurrentProfile,
               time: formattedTime,
               text: message.text!,
             ),

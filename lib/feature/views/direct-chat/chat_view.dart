@@ -133,6 +133,7 @@ class _ChatViewState extends State<ChatView> with ChatViewMixin {
           child: Container(
             alignment: alignment,
             child: ImageBubble(
+              belongToCurrentProfile: belongToCurrentProfile,
               toGroup: false,
               imageUrl: message.imageUrl!,
               text: message.text,
@@ -154,7 +155,7 @@ class _ChatViewState extends State<ChatView> with ChatViewMixin {
           child: Container(
             alignment: alignment,
             child: ChatBubble(
-              belongToCurrentUser:
+              belongToCurrentProfile:
                   authService.isCurrentEmail(message.senderEmail),
               time: formattedTime,
               text: message.text!,
